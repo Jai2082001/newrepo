@@ -43,8 +43,8 @@ jobs:
             script: |
                 sudo yum update
                 sudo yum install -y unzip 
-                rm -rf ~/app
-                cd app.zip
+                sudo rm -rf ~/app
+                cd ~/app.zip
                 unzip app.zip -d ~/app
                 cd ~/app
                 npm install
