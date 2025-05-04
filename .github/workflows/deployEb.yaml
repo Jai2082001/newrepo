@@ -41,8 +41,8 @@ jobs:
             username: ${{ secrets.EC2_USER }}
             key: ${{ secrets.EC2_KEY }}
             script: |
-                sudo apt update
-                sudo apt install -y unzip nodejs npm
+                sudo yum update
+                sudo yum install -y unzip 
                 rm -rf ~/app
                 unzip ~/app.zip -d ~/app
                 cd ~/app
