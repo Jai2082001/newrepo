@@ -44,7 +44,8 @@ jobs:
                 sudo yum update
                 sudo yum install -y unzip 
                 rm -rf ~/app
-                unzip ~/app.zip -d ~/app
+                cd app.zip
+                unzip app.zip -d ~/app
                 cd ~/app
                 npm install
                 pm2 stop all || true
