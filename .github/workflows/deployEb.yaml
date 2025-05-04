@@ -51,3 +51,22 @@ jobs:
                 sudo npm install pm2 -g
                 sudo pm2 stop all || true
                 sudo pm2 start app.js --name "my-app"
+                sudo tee /etc/nginx/conf.d/nodeapp.conf > /dev/null <<EOF
+                server {
+                    listen 80;
+                    server_name _;
+      
+                    location / {
+                        proxy_pass http://localhost:3000;
+                        proxy_http_version 1.1;
+                        proxy_set_header Upgrade \$http_upgrade;
+                        proxy_set_header Connection 'upgrade';
+                        proxy_set_header Host \$host;
+                        proxy_cache_bypass \$http_upgrade;
+                    }
+                }
+                EOF
+      
+                # Enable and restart NGINX
+                sudo systemctl enable nginx
+                sudo systemctl restart nginx
